@@ -15,6 +15,11 @@ let package = Package(
         .package(
             url: "https://github.com/Peter-Schorn/SpotifyAPI.git",
             .branch("proxy-token-server")
+        ),
+        .package(
+            name: "swift-crypto",
+            url: "https://github.com/apple/swift-crypto.git",
+            from: "1.1.3"
         )
     ],
     targets: [
@@ -41,7 +46,8 @@ let package = Package(
             name: "Run",
             dependencies: [
                 .target(name: "App"),
-                .product(name: "SpotifyAPI", package: "SpotifyAPI")
+                .product(name: "SpotifyAPI", package: "SpotifyAPI"),
+                .product(name: "Crypto", package: "swift-crypto"),
             ]
         ),
         .testTarget(

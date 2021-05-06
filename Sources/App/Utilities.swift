@@ -38,6 +38,52 @@ extension Endpoints {
 
 }
 
+extension Data {
+    
+    /*
+     func base64URLEncodedString() -> String {
+         return self.base64EncodedString()
+             .replacingOccurrences(of: "+", with: "-")
+             .replacingOccurrences(of: "/", with: "_")
+             .replacingOccurrences(of: "=", with: "")
+     }
+     */
+
+    init?(
+        base64URLEncoded string: String,
+        options: Data.Base64DecodingOptions = []
+    ) {
+        let base64String = string
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+            .replacingOccurrences(of: "", with: "=")
+        
+        self.init(base64Encoded: base64String, options: options)
+
+    }
+
+}
+
+struct GenericError: Error, AbortError {
+    
+    let message: String
+    let status: HTTPResponseStatus
+    
+    init(_ message: String, status: HTTPResponseStatus = .badRequest) {
+        self.message = message
+        self.status = status
+    }
+
+}
+
+extension GenericError: CustomStringConvertible {
+    var description: String {
+        return """
+            GenericError("\(self.message)")
+            """
+    }
+}
+
 extension ClientCredentialsTokensRequest: Content {
     
     // This property tells vapor to encode instances of this type
@@ -60,6 +106,10 @@ extension PKCETokensRequest: Content {
 
 extension PKCERefreshAccessTokenRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
+}
+
+extension AuthInfo: Content {
+    public static let defaultContentType = HTTPMediaType.json
 }
 
 /*

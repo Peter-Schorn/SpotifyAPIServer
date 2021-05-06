@@ -20,6 +20,8 @@ func routes(_ app: Application) throws {
         clientSecret: clientSecret
     )!
 
+
+    // MARK: TODO: Update Docs
     /// Sends a request to Spotify for the authorization information and
     /// forwards along the response from Spotify as the response from this
     /// server.
@@ -41,26 +43,68 @@ func routes(_ app: Application) throws {
             let bodyString = tokensRequest.body.map(String.init(buffer:))
                 ?? "nil"
 
-            request.logger.info(
+            request.logger.debug(
                 "\(routeString): sending request to Spotify: \(bodyString)"
             )
             
         }
-        .always { result in
-            let resultString: String
-            switch result {
-                case .success(let response):
-                    resultString = String(describing: response)
-                case .failure(let error):
-                    resultString = String(describing: error)
+        .map { clientResponse -> ClientResponse in
+
+            // Only try to decode into `AuthInfo` if the status code is 200. If
+            // Spotify returns an error object, then let the client handle that.
+            guard clientResponse.status == .ok else {
+                return clientResponse
             }
-            request.logger.info(
-                "\(routeString): response from Spotify: \(resultString)"
-            )
+
+            do {
+                
+                let authInfo = try clientResponse.content.decode(AuthInfo.self)
+                
+                // We only need to encrypt the refresh token. If this request
+                // did not return a refresh token (e.g.,
+                // the 'client-credentials-tokens' endpoint), then there's no
+                // encryption to do.
+                guard let refreshToken = authInfo.refreshToken else {
+                    return clientResponse
+                }
+                
+                let encryptedRefreshToken = try encrypt(string: refreshToken)
+                let encryptedAuthInfo = AuthInfo(
+                    accessToken: authInfo.accessToken,
+                    refreshToken: encryptedRefreshToken,
+                    expirationDate: authInfo.expirationDate,
+                    scopes: authInfo.scopes
+                )
+                
+                // Only the refresh token is encrypted.
+                var encryptedClientResponse = clientResponse
+
+                try encryptedClientResponse.content.encode(
+                    encryptedAuthInfo
+                )
+                
+                request.logger.info(
+                    "\(routeString): returning encrypted authInfo"
+                )
+
+                return encryptedClientResponse
+                
+            } catch {
+                request.logger.error(
+                    """
+                    \(routeString): couldn't decode `AuthInfo` or encrypt \
+                    refresh token: \(error)
+                    """
+                )
+                // Don't return the error. Return the response from Spotify.
+                return clientResponse
+            }
+
         }
         
     }
     
+    // Used for testing if the server is online.
     app.post { request -> String in
         return "success"
     }
@@ -75,7 +119,7 @@ func routes(_ app: Application) throws {
         let body = try request.content.decode(
             ClientCredentialsTokensRequest.self
         )
-        request.logger.info("client-credentials-tokens: body: \(body)")
+        request.logger.debug("client-credentials-tokens: body: \(body)")
 
         return retrieveAuthInfo(
             request: request,
@@ -93,7 +137,7 @@ func routes(_ app: Application) throws {
         let remoteTokensRequest = try request.content.decode(
             RemoteTokensRequest.self
         )
-        request.logger.info(
+        request.logger.debug(
             """
             authorization-code-flow/retrieve-tokens: request body: \
             \(remoteTokensRequest)
@@ -123,17 +167,24 @@ func routes(_ app: Application) throws {
         let refreshAccessTokenRequest = try request.content.decode(
             RefreshAccessTokenRequest.self
         )
-        request.logger.info(
+        request.logger.debug(
             """
             authorization-code-flow/refresh-tokens: request body: \
             \(refreshAccessTokenRequest)
             """
         )
         
+        let decryptedRefreshToken = try decrypt(
+            string: refreshAccessTokenRequest.refreshToken
+        )
+        let decryptedRefreshAccessTokenRequest = RefreshAccessTokenRequest(
+            refreshToken: decryptedRefreshToken
+        )
+
         return retrieveAuthInfo(
             request: request,
             additionalHeaders: credentialsHeader,
-            body: refreshAccessTokenRequest
+            body: decryptedRefreshAccessTokenRequest
         )
         
     }
@@ -146,7 +197,7 @@ func routes(_ app: Application) throws {
         let remotePKCETokensRequest = try request.content.decode(
             RemotePKCETokensRequest.self
         )
-        request.logger.info(
+        request.logger.debug(
             """
             authorization-code-flow-pkce/retrieve-tokens: request body: \
             \(remotePKCETokensRequest)
@@ -176,15 +227,18 @@ func routes(_ app: Application) throws {
         let refreshAccessTokenRequest = try request.content.decode(
             RemotePKCERefreshAccessTokenRequest.self
         )
-        request.logger.info(
+        request.logger.debug(
             """
             authorization-code-flow-pkce/refresh-tokens: request body: \
             \(refreshAccessTokenRequest)
             """
         )
         
+        let decryptedRefreshToken = try decrypt(
+            string: refreshAccessTokenRequest.refreshToken
+        )
         let body = PKCERefreshAccessTokenRequest(
-            refreshToken: refreshAccessTokenRequest.refreshToken,
+            refreshToken: decryptedRefreshToken,
             clientId: clientId
         )
 
