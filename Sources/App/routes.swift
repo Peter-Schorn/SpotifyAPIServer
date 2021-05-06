@@ -60,6 +60,10 @@ func routes(_ app: Application) throws {
         }
         
     }
+    
+    app.post { request -> String in
+        return "success"
+    }
 
     // MARK: - Client Credentials Flow: Retrieve Tokens -
     app.post(
