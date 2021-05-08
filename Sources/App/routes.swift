@@ -20,11 +20,9 @@ func routes(_ app: Application) throws {
         clientSecret: clientSecret
     )!
 
-
-    // MARK: TODO: Update Docs
-    /// Sends a request to Spotify for the authorization information and
-    /// forwards along the response from Spotify as the response from this
-    /// server.
+    /// Sends a request to Spotify for the authorization information, encrypts
+    /// the recieved refresh token, and forwards along the response from Spotify
+    /// as the response from this server.
     func retrieveAuthInfo<C: Content>(
         request: Request,
         additionalHeaders: [String: String],
