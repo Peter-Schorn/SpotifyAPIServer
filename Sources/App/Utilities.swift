@@ -96,7 +96,7 @@ extension TokensRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 
-extension RefreshAccessTokenRequest: Content {
+extension RefreshTokensRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 
@@ -104,7 +104,7 @@ extension PKCETokensRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 
-extension PKCERefreshAccessTokenRequest: Content {
+extension PKCERefreshTokensRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 

@@ -133,7 +133,7 @@ func routes(_ app: Application) throws {
     ) { request -> EventLoopFuture<ClientResponse> in
     
         let remoteTokensRequest = try request.content.decode(
-            RemoteTokensRequest.self
+            ProxyTokensRequest.self
         )
         request.logger.debug(
             """
@@ -162,27 +162,27 @@ func routes(_ app: Application) throws {
         "authorization-code-flow", "refresh-tokens"
     ) { request -> EventLoopFuture<ClientResponse> in
         
-        let refreshAccessTokenRequest = try request.content.decode(
-            RefreshAccessTokenRequest.self
+        let refreshTokensRequest = try request.content.decode(
+            RefreshTokensRequest.self
         )
         request.logger.debug(
             """
             authorization-code-flow/refresh-tokens: request body: \
-            \(refreshAccessTokenRequest)
+            \(refreshTokensRequest)
             """
         )
         
         let decryptedRefreshToken = try decrypt(
-            string: refreshAccessTokenRequest.refreshToken
+            string: refreshTokensRequest.refreshToken
         )
-        let decryptedRefreshAccessTokenRequest = RefreshAccessTokenRequest(
+        let decryptedPKCERefreshTokensRequest = RefreshTokensRequest(
             refreshToken: decryptedRefreshToken
         )
 
         return retrieveAuthInfo(
             request: request,
             additionalHeaders: credentialsHeader,
-            body: decryptedRefreshAccessTokenRequest
+            body: decryptedPKCERefreshTokensRequest
         )
         
     }
@@ -193,7 +193,7 @@ func routes(_ app: Application) throws {
     ) { request -> EventLoopFuture<ClientResponse> in
         
         let remotePKCETokensRequest = try request.content.decode(
-            RemotePKCETokensRequest.self
+            ProxyPKCETokensRequest.self
         )
         request.logger.debug(
             """
@@ -222,20 +222,20 @@ func routes(_ app: Application) throws {
         "authorization-code-flow-pkce", "refresh-tokens"
     ) { request -> EventLoopFuture<ClientResponse> in
         
-        let refreshAccessTokenRequest = try request.content.decode(
-            RemotePKCERefreshAccessTokenRequest.self
+        let refreshTokensRequest = try request.content.decode(
+            ProxyPKCERefreshTokensRequest.self
         )
         request.logger.debug(
             """
             authorization-code-flow-pkce/refresh-tokens: request body: \
-            \(refreshAccessTokenRequest)
+            \(refreshTokensRequest)
             """
         )
         
         let decryptedRefreshToken = try decrypt(
-            string: refreshAccessTokenRequest.refreshToken
+            string: refreshTokensRequest.refreshToken
         )
-        let body = PKCERefreshAccessTokenRequest(
+        let body = PKCERefreshTokensRequest(
             refreshToken: decryptedRefreshToken,
             clientId: clientId
         )
