@@ -204,9 +204,9 @@ func routes(_ app: Application) throws {
         
         let body = PKCETokensRequest(
             code: remotePKCETokensRequest.code,
+            codeVerifier: remotePKCETokensRequest.codeVerifier,
             redirectURI: redirectURI,
-            clientId: clientId,
-            codeVerifier: remotePKCETokensRequest.codeVerifier
+            clientId: clientId
         )
         
         return retrieveAuthInfo(
