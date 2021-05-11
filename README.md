@@ -8,7 +8,7 @@ Can be run as a local server directly from Xcode.
 
 * **[Endpoints](#Endpoints)**
 * **[Environment](#Environment)**
-* **[Deploying to Heroku](#Deploying to Heroku)**
+* **[Deploying to Heroku](#Deploying-to-Heroku)**
 
 ## Endpoints
 
