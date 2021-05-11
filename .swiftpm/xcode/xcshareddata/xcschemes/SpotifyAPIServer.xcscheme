@@ -109,11 +109,6 @@
             value = "debug"
             isEnabled = "NO">
          </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "REDIRECT_URI"
-            value = "your redirect URI"
-            isEnabled = "NO">
-         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction

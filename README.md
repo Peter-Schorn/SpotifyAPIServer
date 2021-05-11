@@ -81,6 +81,10 @@ The body must contain the following in x-www-form-urlencoded format:
       <td>code</td>
       <td>The authorization code returned from the initial request to the <code>/authorize</code> endpoint.</td>
     </tr>
+    <tr>
+      <td>redirect_uri</td>
+      <td>The redirect URI, which must match the value your app supplied when requesting the authorization code.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -177,6 +181,10 @@ The body must contain the following in x-www-form-urlencoded format:
     <tr>
       <td>coder verifier</td>
       <td>The code verifier that you generated when creating the authorization URL</td>
+    </tr>
+    <tr>
+      <td>redirect_uri</td>
+      <td>The redirect URI, which must match the value your app supplied when requesting the authorization code.</td>
     </tr>
   </tbody>
 </table>

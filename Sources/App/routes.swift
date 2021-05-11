@@ -1,10 +1,6 @@
 import Vapor
 import SpotifyWebAPI
 
-let redirectURIString = ProcessInfo.processInfo
-    .environment["REDIRECT_URI"]!
-let redirectURI = URL(string: redirectURIString)!
-
 let clientId = ProcessInfo.processInfo
     .environment["SPOTIFY_SWIFT_TESTING_CLIENT_ID"]!
 let clientSecret = ProcessInfo.processInfo
@@ -131,19 +127,19 @@ func routes(_ app: Application) throws {
         "authorization-code-flow", "retrieve-tokens"
     ) { request -> EventLoopFuture<ClientResponse> in
     
-        let remoteTokensRequest = try request.content.decode(
+        let proxyTokensRequest = try request.content.decode(
             ProxyTokensRequest.self
         )
         request.logger.debug(
             """
             authorization-code-flow/retrieve-tokens: request body: \
-            \(remoteTokensRequest)
+            \(proxyTokensRequest)
             """
         )
     
         let body = TokensRequest(
-            code: remoteTokensRequest.code,
-            redirectURI: redirectURI,
+            code: proxyTokensRequest.code,
+            redirectURI: proxyTokensRequest.redirectURI,
             clientId: clientId,
             clientSecret: clientSecret
         )
@@ -191,20 +187,20 @@ func routes(_ app: Application) throws {
         "authorization-code-flow-pkce", "retrieve-tokens"
     ) { request -> EventLoopFuture<ClientResponse> in
         
-        let remotePKCETokensRequest = try request.content.decode(
+        let proxyPKCETokensRequest = try request.content.decode(
             ProxyPKCETokensRequest.self
         )
         request.logger.debug(
             """
             authorization-code-flow-pkce/retrieve-tokens: request body: \
-            \(remotePKCETokensRequest)
+            \(proxyPKCETokensRequest)
             """
         )
         
         let body = PKCETokensRequest(
-            code: remotePKCETokensRequest.code,
-            codeVerifier: remotePKCETokensRequest.codeVerifier,
-            redirectURI: redirectURI,
+            code: proxyPKCETokensRequest.code,
+            codeVerifier: proxyPKCETokensRequest.codeVerifier,
+            redirectURI: proxyPKCETokensRequest.redirectURI,
             clientId: clientId
         )
         
