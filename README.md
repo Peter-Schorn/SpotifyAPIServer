@@ -264,8 +264,6 @@ Requires the following environment variables:
 
 * `SPOTIFY_SWIFT_TESTING_CLIENT_SECRET`: Your client secret from Spotify.
 
-* `REDIRECT_URI`: The URL that Spotify will redirect to after the user logs in to their account.
-
 * `SECRET_KEY`: A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.
 * `LOG_LEVEL`: Not required, but can be used to change the log level of the loggers used by Vapor (but not the ones used by `SpotifyAPI`). See [here](https://docs.vapor.codes/4.0/logging/#level) for more information. See [here](https://devcenter.heroku.com/articles/logging#log-retrieval-via-the-web-dashboard) for how to retrieve the logs from Heroku.
 
