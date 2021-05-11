@@ -14,7 +14,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/Peter-Schorn/SpotifyAPI.git",
-            .branch("proxy-token-server")
+            .branch("master")
         ),
         .package(
             name: "swift-crypto",
