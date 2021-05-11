@@ -1,7 +1,6 @@
 import Vapor
 import SpotifyWebAPI
 
-// MARK: TODO: move somewhere else
 let redirectURIString = ProcessInfo.processInfo
     .environment["REDIRECT_URI"]!
 let redirectURI = URL(string: redirectURIString)!
@@ -103,7 +102,7 @@ func routes(_ app: Application) throws {
     }
     
     // Used for testing if the server is online.
-    app.post { request -> String in
+    app.get { request -> String in
         return "success"
     }
 
