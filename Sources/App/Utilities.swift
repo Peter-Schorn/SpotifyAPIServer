@@ -64,26 +64,6 @@ extension Data {
 
 }
 
-struct GenericError: Error, AbortError {
-    
-    let message: String
-    let status: HTTPResponseStatus
-    
-    init(_ message: String, status: HTTPResponseStatus = .badRequest) {
-        self.message = message
-        self.status = status
-    }
-
-}
-
-extension GenericError: CustomStringConvertible {
-    var description: String {
-        return """
-            GenericError("\(self.message)")
-            """
-    }
-}
-
 extension ClientCredentialsTokensRequest: Content {
     
     // This property tells vapor to encode instances of this type

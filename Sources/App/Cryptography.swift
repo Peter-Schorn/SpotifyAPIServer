@@ -18,7 +18,10 @@ func encrypt(string: String) throws -> String {
     
     do {
         guard let stringData = string.data(using: .utf8) else {
-            throw GenericError("could not convert string to data")
+            throw Abort(
+                .badRequest,
+                reason: "could not convert encrypted string to data"
+            )
         }
         
         let sealedBox = try AES.GCM.seal(
@@ -27,7 +30,10 @@ func encrypt(string: String) throws -> String {
         
         guard let encryptedString = sealedBox.combined?
                 .base64URLEncodedString() else {
-            throw GenericError("could not combine sealed box")
+            throw Abort(
+                .badRequest,
+                reason: "could not combine sealed box"
+            )
         }
         return encryptedString
         
@@ -43,8 +49,9 @@ func decrypt(string: String) throws -> String {
     
     do {
         guard let stringData = Data(base64URLEncoded: string) else {
-            throw GenericError(
-                "could not create data from base64Encoded string"
+            throw Abort(
+                .badRequest,
+                reason: "could not create data from base64Encoded encrypted string"
             )
         }
         let box = try AES.GCM.SealedBox(combined: stringData)
@@ -52,8 +59,9 @@ func decrypt(string: String) throws -> String {
         guard let decryptedDataString = String(
             data: decryptedData, encoding: .utf8
         ) else {
-            throw GenericError(
-                "could not convert decrypted data to string"
+            throw Abort(
+                .badRequest,
+                reason: "could not convert decrypted data to string"
             )
         }
         return decryptedDataString
