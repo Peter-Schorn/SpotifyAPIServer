@@ -66,7 +66,7 @@ func routes(_ app: Application) throws {
                 return clientResponse
             }
 
-            // Could throw a `Abort` error.
+            // Could throw an `Abort` error.
             let encryptedRefreshToken = try encrypt(string: refreshToken)
             let encryptedAuthInfo = AuthInfo(
                 accessToken: authInfo.accessToken,
