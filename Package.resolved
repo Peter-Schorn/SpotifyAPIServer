@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/vapor/multipart-kit.git",
         "state": {
           "branch": null,
-          "revision": "4fcc81d2ce9210a0debceb015a210c2d2eb1da71",
-          "version": "4.0.2"
+          "revision": "2376b4949e8a1675f7c495224029498194eecf61",
+          "version": "4.0.3"
         }
       },
       {
@@ -68,8 +68,8 @@
         "package": "SpotifyAPI",
         "repositoryURL": "https://github.com/Peter-Schorn/SpotifyAPI.git",
         "state": {
-          "branch": "proxy-token-server",
-          "revision": "5ff8fb824ccbd54d804c72c9d2eededb13c09308",
+          "branch": "master",
+          "revision": "abf0b1087a9538652b2ecb3326a427a49f40ce82",
           "version": null
         }
       },
