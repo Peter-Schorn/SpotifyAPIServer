@@ -1,0 +1,16 @@
+name: Swift
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest]
+    
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: swift build -v -Xswiftc -warnings-as-errors
