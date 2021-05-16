@@ -25,7 +25,7 @@ Requires the following environment variables:
 
 This server is pre-configured for deployment to [Heroku](https://www.heroku.com/about) (although any platform can be used).
 
-**One-Click Deploy**
+**One-Click Deployment**
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
