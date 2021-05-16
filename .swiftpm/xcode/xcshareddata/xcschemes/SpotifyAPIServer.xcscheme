@@ -90,18 +90,18 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "SPOTIFY_SWIFT_TESTING_CLIENT_ID"
+            key = "CLIENT_ID"
             value = "your client id"
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "SECRET_KEY"
-            value = "randomly generate string"
+            key = "CLIENT_SECRET"
+            value = "your client secret"
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "SPOTIFY_SWIFT_TESTING_CLIENT_SECRET"
-            value = "your client secret"
+            key = "SECRET_KEY"
+            value = "randomly generated string"
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable

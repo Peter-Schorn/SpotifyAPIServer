@@ -6,9 +6,9 @@ private let symmetricKey: SymmetricKey = {
     let secretKeyString = ProcessInfo.processInfo
              .environment["SECRET_KEY"]!
     
-    let keyStringdata = secretKeyString.data(using: .utf8)!
+    let keyStringData = secretKeyString.data(using: .utf8)!
 
-    let hash = SHA256.hash(data: keyStringdata)
+    let hash = SHA256.hash(data: keyStringData)
     
     return SymmetricKey(data: hash)
 

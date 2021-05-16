@@ -6,9 +6,9 @@ func routes(_ app: Application) throws {
     // MARK: - Constants -
 
     let clientId = ProcessInfo.processInfo
-        .environment["SPOTIFY_SWIFT_TESTING_CLIENT_ID"]!
+        .environment["CLIENT_ID"]!
     let clientSecret = ProcessInfo.processInfo
-        .environment["SPOTIFY_SWIFT_TESTING_CLIENT_SECRET"]!
+        .environment["CLIENT_SECRET"]!
 
     let credentialsHeader = Headers.basicBase64Encoded(
         clientId: clientId,
