@@ -297,5 +297,4 @@ Finally, deploy to Heroku by running the following:
 git push heroku main
 ```
 
-See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard) for how to configure the environment variables as described above on heroku.
-
+See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard) for how to configure the above-mentioned environment variables on heroku.
