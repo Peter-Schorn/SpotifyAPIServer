@@ -271,13 +271,21 @@ Requires the following environment variables:
 
 This server is pre-configured for deployment to [Heroku](https://www.heroku.com/about) (although any platform can be used).
 
-First, sign up for a Heroku account, install the command-line tool, login, and create a Heroku application, as described [here](https://docs.vapor.codes/4.0/deploy/heroku/). Set your working directory to this package and run the following command:
+**One-Click Deploy**
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+**Manual Deployment**
+
+First, sign up for a Heroku account, install the command-line tool, login, and create a Heroku application, as described [here](https://docs.vapor.codes/4.0/deploy/heroku/). Clone this repository and set it as the working directory. Then, run the following command:
 
 ```
 heroku git:remote -a [app name]
 ```
 
-where `app name` is the name of the application that you just created on Heroku. Next, set the buildpack to teach heroku how to deal with vapor:
+where `app name` is the name of the application that you just created on Heroku. This command adds a custom remote to your repository called `heroku`; pushing to it causes your app to be deployed.
+
+Next, set the buildpack to teach heroku how to deal with vapor:
 
 ```
 heroku buildpacks:set vapor/vapor

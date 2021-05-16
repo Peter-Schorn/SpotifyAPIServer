@@ -1,0 +1,27 @@
+{
+    "name": "Spotify API Server",
+    "description": "A server that handles the process of retrieving the authorization information and refreshing tokens for the Spotify web API on behalf of your frontend app. Supports the Client Credentials Flow, Authorization Code Flow, and Authorization Code Flow with Proof Key for Code Exchange.",
+    "repository": "https://github.com/Peter-Schorn/SpotifyAPIServer",
+    "keywords": [
+        "Spotify API"
+    ],
+    "env": {
+        "CLIENT_ID": {
+            "description": "The Client ID of your Spotify application. Retrieved it from https://developer.spotify.com/dashboard",
+            "required": true
+        },
+        "CLIENT_SECRET": {
+            "description": "The Client Secret of your Spotify application. Retrieve it from https://developer.spotify.com/dashboard",
+            "required": true
+        },
+        "SECRET_KEY": {
+            "description": "A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.",
+            "required": true
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "https://github.com/vapor-community/heroku-buildpack"
+        }
+    ]
+}
