@@ -6,9 +6,52 @@ Can be run as a local server directly from Xcode. It will run on `http://127.0.0
 
 ## Table of Contents
 
-* **[Endpoints](#Endpoints)**
 * **[Environment](#Environment)**
 * **[Deploying to Heroku](#Deploying-to-Heroku)**
+* **[Endpoints](#Endpoints)**
+
+## Environment
+
+Requires the following environment variables:
+
+* `CLIENT_ID`: Your client id from Spotify.
+
+* `CLIENT_SECRET`: Your client secret from Spotify.
+
+* `SECRET_KEY`: A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.
+* `LOG_LEVEL`: Not required, but can be used to change the log level of the loggers used by Vapor (but not the ones used by `SpotifyAPI`). See [here](https://docs.vapor.codes/4.0/logging/#level) for more information. See [here](https://devcenter.heroku.com/articles/logging#log-retrieval-via-the-web-dashboard) for how to retrieve the logs from Heroku.
+
+## Deploying to Heroku
+
+This server is pre-configured for deployment to [Heroku](https://www.heroku.com/about) (although any platform can be used).
+
+**One-Click Deploy**
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+**Manual Deployment**
+
+First, sign up for a Heroku account, install the command-line tool, login, and create a Heroku application, as described [here](https://docs.vapor.codes/4.0/deploy/heroku/). Clone this repository and set it as the working directory. Then, run the following command:
+
+```
+heroku git:remote -a [app name]
+```
+
+where `app name` is the name of the application that you just created on Heroku. This command adds a custom remote to your repository called `heroku`; pushing to it causes your app to be deployed.
+
+Next, set the buildpack to teach heroku how to deal with vapor:
+
+```
+heroku buildpacks:set vapor/vapor
+```
+
+Finally, deploy to Heroku by running the following:
+
+```
+git push heroku main
+```
+
+See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard) for how to configure the above-mentioned environment variables on heroku.
 
 ## Endpoints
 
@@ -38,6 +81,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
+
 
  see [`ClientCredentialsTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsTokensRequest.html).
 
@@ -88,6 +132,7 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
+
 See [`ProxyTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyTokensRequest.html).
 
 **Response**
@@ -134,6 +179,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
+
 
 See [`RefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html).
 
@@ -189,6 +235,7 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
+
 See [`ProxyPKCETokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyPKCETokensRequest.html).
 
 **Response**
@@ -236,6 +283,7 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
+
 See [`ProxyPKCERefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html).
 
 **Response**
@@ -255,46 +303,3 @@ This method returns the authorization information as JSON data that can be decod
 ```
 
 Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=6.%20requesting%20a%20refreshed%20access%20token).
-
-## Environment
-
-Requires the following environment variables:
-
-* `CLIENT_ID`: Your client id from Spotify.
-
-* `CLIENT_SECRET`: Your client secret from Spotify.
-
-* `SECRET_KEY`: A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.
-* `LOG_LEVEL`: Not required, but can be used to change the log level of the loggers used by Vapor (but not the ones used by `SpotifyAPI`). See [here](https://docs.vapor.codes/4.0/logging/#level) for more information. See [here](https://devcenter.heroku.com/articles/logging#log-retrieval-via-the-web-dashboard) for how to retrieve the logs from Heroku.
-
-## Deploying to Heroku
-
-This server is pre-configured for deployment to [Heroku](https://www.heroku.com/about) (although any platform can be used).
-
-**One-Click Deploy**
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-**Manual Deployment**
-
-First, sign up for a Heroku account, install the command-line tool, login, and create a Heroku application, as described [here](https://docs.vapor.codes/4.0/deploy/heroku/). Clone this repository and set it as the working directory. Then, run the following command:
-
-```
-heroku git:remote -a [app name]
-```
-
-where `app name` is the name of the application that you just created on Heroku. This command adds a custom remote to your repository called `heroku`; pushing to it causes your app to be deployed.
-
-Next, set the buildpack to teach heroku how to deal with vapor:
-
-```
-heroku buildpacks:set vapor/vapor
-```
-
-Finally, deploy to Heroku by running the following:
-
-```
-git push heroku main
-```
-
-See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard) for how to configure the above-mentioned environment variables on heroku.

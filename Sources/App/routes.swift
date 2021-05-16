@@ -58,10 +58,9 @@ func routes(_ app: Application) throws {
             // Could throw a `DecodingError`.
             let authInfo = try clientResponse.content.decode(AuthInfo.self)
 
-            // We only need to encrypt the refresh token. If this request
-            // did not return a refresh token (e.g.,
-            // the 'client-credentials-tokens' endpoint), then there's no
-            // encryption to do.
+            // We only need to encrypt the refresh token. If this request did
+            // not return a refresh token (e.g., the 'client-credentials-tokens'
+            // endpoint), then there's no encryption to do.
             guard let refreshToken = authInfo.refreshToken else {
                 return clientResponse
             }
