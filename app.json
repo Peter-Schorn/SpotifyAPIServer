@@ -7,7 +7,7 @@
     ],
     "env": {
         "CLIENT_ID": {
-            "description": "The Client ID of your Spotify application. Retrieved it from https://developer.spotify.com/dashboard",
+            "description": "The Client ID of your Spotify application. Retrieve it from https://developer.spotify.com/dashboard",
             "required": true
         },
         "CLIENT_SECRET": {
