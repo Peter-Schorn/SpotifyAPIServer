@@ -79,7 +79,7 @@ The body must contain the following in x-www-form-urlencoded format:
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td><code>client_credentials</code>.</td>
+      <td><code>client_credentials</code></td>
     </tr>
   </tbody>
 </table>
@@ -123,7 +123,7 @@ The body must contain the following in x-www-form-urlencoded format:
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td><code>authorization_code</code>.</td>
+      <td><code>authorization_code</code></td>
     </tr>
     <tr>
       <td>code</td>
@@ -177,7 +177,7 @@ The body must contain the following in x-www-form-urlencoded format:
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td><code>refresh token</code>.</td>
+      <td><code>refresh token</code></td>
     </tr>
     <tr>
       <td>refresh_token</td>
@@ -226,7 +226,7 @@ The body must contain the following in x-www-form-urlencoded format:
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td><code>authorization_code</code>.</td>
+      <td><code>authorization_code</code></td>
     </tr>
     <tr>
       <td>code</td>
@@ -284,7 +284,7 @@ The body must contain the following in x-www-form-urlencoded format:
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td><code>refresh token</code>.</td>
+      <td><code>refresh token</code></td>
     </tr>
     <tr>
       <td>refresh_token</td>
