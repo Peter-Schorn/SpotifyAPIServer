@@ -61,7 +61,7 @@ Returns the text "success". Used to indicate that the server is online.
 
 ### POST /client-credentials-tokens
 
-A request to this endpoint can be made by [`ClientCredentialsFlowProxyBackend.makeClientCredentialsTokensRequest()`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsFlowProxyBackend.html#/s:13SpotifyWebAPI33ClientCredentialsFlowProxyBackendV04makedE13TokensRequest7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGyF).
+A request to this endpoint can be made by [`ClientCredentialsFlowProxyBackend.makeClientCredentialsTokensRequest()`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsFlowProxyBackend.html#/s:13SpotifyWebAPI33ClientCredentialsFlowProxyBackendV04makedE13TokensRequest7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGyF). Assign this endpoint to `ClientCredentialsFlowProxyBackend.tokensURL`.
 
 **Request**
 
@@ -105,7 +105,7 @@ Read more at the [Spotify web API reference](https://developer.spotify.com/docum
 
 ### POST /authorization-code-flow/retrieve-tokens
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.requestAccessAndRefreshTokens(code:redirectURIWithQuery:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowProxyBackend.html#/s:13SpotifyWebAPI33AuthorizationCodeFlowProxyBackendV29requestAccessAndRefreshTokens4code20redirectURIWithQuery7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_AJ3URLVtF).
+A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.requestAccessAndRefreshTokens(code:redirectURIWithQuery:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowProxyBackend.html#/s:13SpotifyWebAPI33AuthorizationCodeFlowProxyBackendV29requestAccessAndRefreshTokens4code20redirectURIWithQuery7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_AJ3URLVtF). Assign this endpoint to `AuthorizationCodeFlowProxyBackend.tokensURL`.
 
 **Request**
 
@@ -159,7 +159,7 @@ Read more at the [Spotify web API reference](https://developer.spotify.com/docum
 
 ### POST /authorization-code-flow/refresh-tokens
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.refreshTokens(refreshToken:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowProxyBackend.html#/s:13SpotifyWebAPI33AuthorizationCodeFlowProxyBackendV13refreshTokens0I5Token7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_tF).
+A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.refreshTokens(refreshToken:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowProxyBackend.html#/s:13SpotifyWebAPI33AuthorizationCodeFlowProxyBackendV13refreshTokens0I5Token7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_tF). Assign this endpoint to `AuthorizationCodeFlowProxyBackend.tokenRefreshURL`.
 
 **Request**
 
@@ -208,7 +208,7 @@ Read more at the [Spotify web API reference](https://developer.spotify.com/docum
 
 ### POST /authorization-code-flow-pkce/retrieve-tokens
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.requestAccessAndRefreshTokens(code:codeVerifier:redirectURIWithQuery:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowPKCEProxyBackend.html#/s:13SpotifyWebAPI37AuthorizationCodeFlowPKCEProxyBackendV29requestAccessAndRefreshTokens4code0N8Verifier20redirectURIWithQuery7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_SSAK3URLVtF).
+A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.requestAccessAndRefreshTokens(code:codeVerifier:redirectURIWithQuery:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowPKCEProxyBackend.html#/s:13SpotifyWebAPI37AuthorizationCodeFlowPKCEProxyBackendV29requestAccessAndRefreshTokens4code0N8Verifier20redirectURIWithQuery7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_SSAK3URLVtF). Assign this endpoint to `AuthorizationCodeFlowPKCEProxyBackend.tokensURL`.
 
 **Request**
 
@@ -266,7 +266,7 @@ Read more at the [Spotify web API reference](https://developer.spotify.com/docum
 
 ### POST /authorization-code-flow-pkce/refresh-tokens
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.refreshTokens(refreshToken:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowPKCEProxyBackend.html#/s:13SpotifyWebAPI37AuthorizationCodeFlowPKCEProxyBackendV13refreshTokens0I5Token7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_tF).
+A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.refreshTokens(refreshToken:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowPKCEProxyBackend.html#/s:13SpotifyWebAPI37AuthorizationCodeFlowPKCEProxyBackendV13refreshTokens0I5Token7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_tF). Assign this endpoint to `AuthorizationCodeFlowPKCEProxyBackend.tokenRefreshURL`.
 
 **Request**
 
