@@ -5,15 +5,24 @@ func routes(_ app: Application) throws {
     
     // MARK: - Constants -
 
-    let clientId = ProcessInfo.processInfo
-        .environment["CLIENT_ID"]!
-    let clientSecret = ProcessInfo.processInfo
-        .environment["CLIENT_SECRET"]!
-
-    let credentialsHeader = Headers.basicBase64Encoded(
+    guard let clientId = ProcessInfo.processInfo.environment["CLIENT_ID"] else {
+        fatalError("could not find 'CLIENT_ID' in environment variables")
+    }
+    
+    guard let clientSecret = ProcessInfo.processInfo
+            .environment["CLIENT_SECRET"] else {
+        fatalError("could not find 'CLIENT_SECRET' in environment variables")
+    }
+    
+    guard let credentialsHeader = Headers.basicBase64Encoded(
         clientId: clientId,
         clientSecret: clientSecret
-    )!
+    ) else {
+        fatalError(
+            "could not create credentialsHeader from client id and client " +
+            "secret"
+        )
+    }
     
     // MARK: - Helpers -
 
