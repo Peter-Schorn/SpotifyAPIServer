@@ -58,7 +58,7 @@ See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-da
 
 Returns the text "success". Used to indicate that the server is online.
 
-### POST /client-credentials-tokens
+### POST /client-credentials-flow/retrieve-tokens
 
 A request to this endpoint can be made by [`ClientCredentialsFlowProxyBackend.makeClientCredentialsTokensRequest()`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsFlowProxyBackend.html#/s:13SpotifyWebAPI33ClientCredentialsFlowProxyBackendV04makedE13TokensRequest7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGyF). Assign this endpoint to `ClientCredentialsFlowProxyBackend.tokensURL`.
 

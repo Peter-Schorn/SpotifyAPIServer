@@ -88,8 +88,9 @@ func routes(_ app: Application) throws {
             )
 
             // We only need to encrypt the refresh token. If this request did
-            // not return a refresh token (e.g., the 'client-credentials-tokens'
-            // endpoint), then there's no encryption to do.
+            // not return a refresh token (e.g., the
+            // /client-credentials-flow/retrieve-tokens endpoint), then there's
+            // no encryption to do.
             guard let refreshToken = authInfo.refreshToken else {
                 return clientResponse
             }
@@ -127,7 +128,7 @@ func routes(_ app: Application) throws {
 
     // MARK: - Client Credentials Flow: Retrieve Tokens -
     app.post(
-        "client-credentials-tokens"
+        "client-credentials-flow", "retrieve-tokens"
     ) { request -> EventLoopFuture<ClientResponse> in
         
         // The body should be the following in "x-www-form-urlencoded" format:
@@ -135,7 +136,7 @@ func routes(_ app: Application) throws {
         let body = try request.content.decode(
             ClientCredentialsTokensRequest.self
         )
-        request.logger.info("client-credentials-tokens: body: \(body)")
+        request.logger.info("client-credentials-flow/retrieve-tokens: body: \(body)")
 
         return retrieveAuthInfo(
             request: request,
