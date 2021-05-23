@@ -65,15 +65,6 @@
         }
       },
       {
-        "package": "SpotifyAPI",
-        "repositoryURL": "https://github.com/Peter-Schorn/SpotifyAPI.git",
-        "state": {
-          "branch": "master",
-          "revision": "abf0b1087a9538652b2ecb3326a427a49f40ce82",
-          "version": null
-        }
-      },
-      {
         "package": "swift-backtrace",
         "repositoryURL": "https://github.com/swift-server/swift-backtrace.git",
         "state": {

@@ -18,6 +18,10 @@
             "description": "A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.",
             "required": true
         },
+        "REDIRECT_URI": {
+            "description": "The redirect URI. Can be omitted if this value is sent in the body of requests to the /authorization-code-flow/retrieve-tokens or /authorization-code-flow-pkce/retrieve-tokens endpoints. If you are using this server with the Spotify iOS SDK, then you must set this value, as it will not be sent in the body of the request to the /authorization-code-flow/retrieve-tokens endpoint.",
+            "required": false
+        },
         "LOG_LEVEL": {
             "description": "Not required, but can be used to change the log level of the loggers used by Vapor (but not the ones used by SpotifyAPI).",
             "required": false,

@@ -13,7 +13,20 @@ func routes(_ app: Application) throws {
             .environment["CLIENT_SECRET"] else {
         fatalError("could not find 'CLIENT_SECRET' in environment variables")
     }
-    
+
+    let redirectURI: URL? = {
+        if let redirectURIString = ProcessInfo.processInfo
+                .environment["REDIRECT_URI"] {
+            if let redirectURI = URL(string: redirectURIString) {
+                return redirectURI
+            }
+            fatalError(
+                "could not convert redirect URI to URL: '\(redirectURIString)'"
+            )
+        }
+        return nil
+    }()
+
     guard let credentialsHeader = Headers.basicBase64Encoded(
         clientId: clientId,
         clientSecret: clientSecret
@@ -23,7 +36,7 @@ func routes(_ app: Application) throws {
             "secret"
         )
     }
-    
+       
     // MARK: - Helpers -
 
     /// Sends a request to Spotify for the authorization information, encrypts
@@ -66,6 +79,13 @@ func routes(_ app: Application) throws {
 
             // Could throw a `DecodingError`.
             let authInfo = try clientResponse.content.decode(AuthInfo.self)
+
+            request.logger.info(
+                """
+                \(routeString): received auth info:
+                \(authInfo)
+                """
+            )
 
             // We only need to encrypt the refresh token. If this request did
             // not return a refresh token (e.g., the 'client-credentials-tokens'
@@ -140,9 +160,19 @@ func routes(_ app: Application) throws {
             """
         )
     
+        guard let redirectURI = proxyTokensRequest.redirectURI ?? redirectURI else {
+            throw Abort(
+                .badRequest,
+                reason: """
+                    the redirect URI must be present in either the body of \
+                    this request or the 'REDIRECT_URI' environment variable
+                    """
+            )
+        }
+        
         let body = TokensRequest(
             code: proxyTokensRequest.code,
-            redirectURI: proxyTokensRequest.redirectURI,
+            redirectURI: redirectURI,
             clientId: clientId,
             clientSecret: clientSecret
         )
@@ -200,10 +230,20 @@ func routes(_ app: Application) throws {
             """
         )
         
+        guard let redirectURI = proxyPKCETokensRequest.redirectURI ?? redirectURI else {
+            throw Abort(
+                .badRequest,
+                reason: """
+                    the redirect URI must be present in either the body of \
+                    this request or the 'REDIRECT_URI' environment variable
+                    """
+            )
+        }
+        
         let body = PKCETokensRequest(
             code: proxyPKCETokensRequest.code,
             codeVerifier: proxyPKCETokensRequest.codeVerifier,
-            redirectURI: proxyPKCETokensRequest.redirectURI,
+            redirectURI: redirectURI,
             clientId: clientId
         )
         
@@ -247,4 +287,3 @@ func routes(_ app: Application) throws {
     }
     
 }
-

@@ -15,9 +15,8 @@ Can be run as a local server directly from Xcode. It will run on `http://127.0.0
 Requires the following environment variables:
 
 * `CLIENT_ID`: Your client id from Spotify.
-
 * `CLIENT_SECRET`: Your client secret from Spotify.
-
+* `REDIRECT_URI`:  The redirect URI. Can be omitted if this value is sent in the body of requests to the [/authorization-code-flow/retrieve-tokens](#post-authorization-code-flowretrieve-tokens) or [/authorization-code-flow-pkce/retrieve-tokens](#post-authorization-code-flow-pkceretrieve-tokens) endpoints. If you are using this server with the [Spotify iOS SDK](https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh), then you must set this value, as it will not be sent in the body of the request to the /authorization-code-flow/retrieve-tokens endpoint. 
 * `SECRET_KEY`: A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.
 * `LOG_LEVEL`: Not required, but can be used to change the log level of the loggers used by Vapor (but not the ones used by `SpotifyAPI`). See [here](https://docs.vapor.codes/4.0/logging/#level) for more information. See [here](https://devcenter.heroku.com/articles/logging#log-retrieval-via-the-web-dashboard) for how to retrieve the logs from Heroku.
 
@@ -83,9 +82,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
-
-
- see [`ClientCredentialsTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsTokensRequest.html).
+ see [`ClientCredentialsTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsTokensRequest.html), which can be used to encode this data.
 
 **Response** 
 
@@ -131,13 +128,12 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
     <tr>
       <td>redirect_uri</td>
-      <td>The redirect URI, which must match the value your app supplied when requesting the authorization code.</td>
+      <td>The redirect URI, which must match the value your app supplied when requesting the authorization code. Can be omitted if this value is stored in the <code>REDIRECT_URI</code> environment variable.</td>
     </tr>
   </tbody>
 </table>
 
-
-See [`ProxyTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyTokensRequest.html).
+See [`ProxyTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyTokensRequest.html), which can be used to encode this data.
 
 **Response**
 
@@ -185,9 +181,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
-
-
-See [`RefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html).
+See [`RefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html), which can be used to encode this data.
 
 **Response**
 
@@ -238,13 +232,12 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
     <tr>
       <td>redirect_uri</td>
-      <td>The redirect URI, which must match the value your app supplied when requesting the authorization code.</td>
+      <td>The redirect URI, which must match the value your app supplied when requesting the authorization code. Can be omitted if this value is stored in the <code>REDIRECT_URI</code> environment variable.</td>
     </tr>
   </tbody>
 </table>
 
-
-See [`ProxyPKCETokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyPKCETokensRequest.html).
+See [`ProxyPKCETokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyPKCETokensRequest.html), which can be used to encode this data.
 
 **Response**
 
@@ -292,9 +285,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
-
-
-See [`ProxyPKCERefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html).
+See [`ProxyPKCERefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html), which can be used to encode this data.
 
 **Response**
 
