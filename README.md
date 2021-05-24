@@ -82,7 +82,8 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
- see [`ClientCredentialsTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsTokensRequest.html), which can be used to encode this data.
+
+See [`ClientCredentialsTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsTokensRequest.html), which can be used to encode this data.
 
 **Response** 
 
@@ -181,6 +182,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
+
 See [`RefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html), which can be used to encode this data.
 
 **Response**
@@ -285,6 +287,7 @@ The body must contain the following in x-www-form-urlencoded format:
     </tr>
   </tbody>
 </table>
+
 See [`ProxyPKCERefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html), which can be used to encode this data.
 
 **Response**
