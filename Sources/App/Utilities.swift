@@ -38,38 +38,16 @@ extension Endpoints {
 
 }
 
-extension Data {
-    
-    /*
-     func base64URLEncodedString() -> String {
-         return self.base64EncodedString()
-             .replacingOccurrences(of: "+", with: "-")
-             .replacingOccurrences(of: "/", with: "_")
-             .replacingOccurrences(of: "=", with: "")
-     }
-     */
-
-    init?(
-        base64URLEncoded string: String,
-        options: Data.Base64DecodingOptions = []
-    ) {
-        let base64String = string
-            .replacingOccurrences(of: "-", with: "+")
-            .replacingOccurrences(of: "_", with: "/")
-            .replacingOccurrences(of: "", with: "=")
-        
-        self.init(base64Encoded: base64String, options: options)
-
-    }
-
-}
-
 extension ClientCredentialsTokensRequest: Content {
     
     // This property tells vapor to encode instances of this type
     // using the "x-www-form-urlencoded" format by default.
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
     
+}
+
+extension ProxyTokensRequest: Content {
+    public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 
 extension TokensRequest: Content {
@@ -80,7 +58,15 @@ extension RefreshTokensRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 
+extension ProxyPKCETokensRequest: Content {
+    public static let defaultContentType = HTTPMediaType.urlEncodedForm
+}
+
 extension PKCETokensRequest: Content {
+    public static let defaultContentType = HTTPMediaType.urlEncodedForm
+}
+
+extension ProxyPKCERefreshTokensRequest: Content {
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
 }
 

@@ -55,6 +55,9 @@ let package = Package(
             dependencies: [
                 .target(name: "App"),
                 .product(name: "XCTVapor", package: "vapor"),
+                .product(name: "SpotifyAPI", package: "SpotifyAPI"),
+                .product(name: "_SpotifyAPITestUtilities", package: "SpotifyAPI"),
+                .product(name: "Crypto", package: "swift-crypto")
             ]
         )
     ]

@@ -77,7 +77,6 @@ func routes(_ app: Application) throws {
                 return clientResponse
             }
 
-            // Could throw a `DecodingError`.
             let authInfo = try clientResponse.content.decode(AuthInfo.self)
 
             request.logger.info(
@@ -136,7 +135,9 @@ func routes(_ app: Application) throws {
         let body = try request.content.decode(
             ClientCredentialsTokensRequest.self
         )
-        request.logger.info("client-credentials-flow/retrieve-tokens: body: \(body)")
+        request.logger.info(
+            "client-credentials-flow/retrieve-tokens: body: \(body)"
+        )
 
         return retrieveAuthInfo(
             request: request,

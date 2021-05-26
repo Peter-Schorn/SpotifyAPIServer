@@ -37,9 +37,13 @@ func encrypt(string: String) throws -> String {
         }
         return encryptedString
         
+    } catch let abortError as Abort {
+        throw abortError
     } catch {
-        print("encrypt error:", error)
-        throw error
+        throw Abort(
+            .badRequest,
+            reason: "could not encrypt refresh token"
+        )
     }
 
     
@@ -66,9 +70,13 @@ func decrypt(string: String) throws -> String {
         }
         return decryptedDataString
         
+    } catch let abortError as Abort {
+        throw abortError
     } catch {
-        print("decrypt error:", error)
-        throw error
+        throw Abort(
+            .badRequest,
+            reason: "could not decrypt refresh token"
+        )
     }
 
     
