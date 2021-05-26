@@ -16,6 +16,7 @@ env:
 jobs:
   test_linux:
     strategy:
+      fail-fast: false
       matrix:
         image: ["swift:5.3", "swift:5.4"]
     
@@ -24,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: swift build -v -Xswiftc -warnings-as-errors
+      run: swift build --build-tests -v -Xswiftc -warnings-as-errors
     - name: Test
       run: swift test --filter "GeneralTests|ClientCredentialsFlowTests"
 
@@ -33,7 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: swift build -v -Xswiftc -warnings-as-errors
+      run: swift build --build-tests -v -Xswiftc -warnings-as-errors
     - name: Test
       run: swift test
     
