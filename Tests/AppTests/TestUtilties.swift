@@ -127,24 +127,19 @@ func XCTAssertDateIsOneHourFromNow(
 
 }
 
-/// Configures the "SPOTIFY_SWIFT_TESTING_CLIENT_ID" and
-/// "SPOTIFY_SWIFT_TESTING_CLIENT_SECRET" environment variables, which are used
-/// in `SpotifyAPITestUtilities`
-func configureEnvironmentVariables() {
-    
+/// The client id and client secret, retrieved from the "CLIENT_ID" and
+/// "CLIENT_SECRET" environment variables, respectively.
+let spotifyCredentials: (clientId: String, clientSecret: String) = {
     guard let clientId = ProcessInfo.processInfo
             .environment["CLIENT_ID"] else {
-        fatalError("could not find 'CLIENT_ID' in environment variables")
+        fatalError("could not find 'CLIENT_ID' in the environment variables")
     }
     guard let clientSecret = ProcessInfo.processInfo
             .environment["CLIENT_SECRET"] else {
-        fatalError("could not find 'CLIENT_SECRET' in environment variables")
+        fatalError("could not find 'CLIENT_SECRET' in the environment variables")
     }
-    
-    setenv("SPOTIFY_SWIFT_TESTING_CLIENT_ID", clientId, 1)
-    setenv("SPOTIFY_SWIFT_TESTING_CLIENT_SECRET", clientSecret, 1)
-    
-}
+    return (clientId: clientId, clientSecret: clientSecret)
+}()
 
 /// Sets invalid values for the "CLIENT_ID" and "CLIENT_SECRET" environment
 /// variables before `body` and then restores them to their previous values
@@ -153,16 +148,15 @@ func withInvalidCredentials<T>(
     _ body: () throws -> T
 ) rethrows -> T {
     
-    let clientId = ProcessInfo.processInfo.environment["CLIENT_ID"]!
-    let clientSecret = ProcessInfo.processInfo.environment["CLIENT_SECRET"]!
+    let credentials = spotifyCredentials
     
     setenv("CLIENT_ID", "invalidClientId", 1)
     setenv("CLIENT_SECRET", "invalidClientSecret", 1)
     
     let result = try body()
     
-    setenv("CLIENT_ID", clientId, 1)
-    setenv("CLIENT_SECRET", clientSecret, 1)
+    setenv("CLIENT_ID", credentials.clientId, 1)
+    setenv("CLIENT_SECRET", credentials.clientSecret, 1)
     
     return result
     
@@ -173,7 +167,10 @@ func withNoRedirectURI<T>(
     _ body: () throws -> T
 ) rethrows -> T {
     
-    let redirectURI = ProcessInfo.processInfo.environment["REDIRECT_URI"]!
+    guard let redirectURI = ProcessInfo.processInfo
+            .environment["REDIRECT_URI"] else {
+        fatalError("could not find 'REDIRECT_URI' in the environment variables")
+    }
     
     unsetenv("REDIRECT_URI")
     
@@ -231,6 +228,14 @@ extension SpotifyAPI {
 
 extension SpotifyAPI where AuthorizationManager == AuthorizationCodeFlowManager {
 
+    /// A shared instance used for testing purposes.
+    static let sharedTest = SpotifyAPI(
+        authorizationManager: AuthorizationCodeFlowManager(
+            clientId: spotifyCredentials.clientId,
+            clientSecret: spotifyCredentials.clientSecret
+        )
+    )
+
     /// Retrieves the user's followed artists to ensure that the access token
     /// is valid and authorized for the `userFollowRead` scope.
     func retrieveFollowedArtistsTest(
@@ -274,6 +279,13 @@ extension SpotifyAPI where AuthorizationManager == AuthorizationCodeFlowManager 
 
 extension SpotifyAPI where AuthorizationManager == AuthorizationCodeFlowPKCEManager {
     
+    /// A shared instance used for testing purposes.
+    static let sharedTest = SpotifyAPI(
+        authorizationManager: AuthorizationCodeFlowPKCEManager(
+            clientId: spotifyCredentials.clientId
+        )
+    )
+
     /// Retrieves the current user and asserts that
     /// `explicitContentSettingIsLocked` and `allowsExplicitContent` are not
     /// `nil` to ensure the access token is valid and authorized for the
@@ -330,7 +342,7 @@ extension SpotifyAPI where AuthorizationManager == AuthorizationCodeFlowPKCEMana
 extension AuthorizationCodeFlowManager {
     
     /// The scopes used in `self.getRedirectURL`.
-    var getRedirectURLScopes: Set<Scope> {
+    static var getRedirectURLScopes: Set<Scope> {
         [
             .userFollowRead,
             .streaming
@@ -344,7 +356,7 @@ extension AuthorizationCodeFlowManager {
         let authorizationURL = self.makeAuthorizationURL(
             redirectURI: localHostURL,
             showDialog: false,
-            scopes: self.getRedirectURLScopes
+            scopes: Self.getRedirectURLScopes
         )!
         
         if let redirectURI = openAuthorizationURLAndWaitForRedirect(
@@ -389,7 +401,7 @@ extension AuthorizationCodeFlowManager {
 extension AuthorizationCodeFlowPKCEManager {
     
     /// The scopes used in `self.getRedirectURL`.
-    var getRedirectURLScopes: Set<Scope> {
+    static var getRedirectURLScopes: Set<Scope> {
         [
             .userLibraryRead,
             .userReadPrivate
@@ -408,7 +420,7 @@ extension AuthorizationCodeFlowPKCEManager {
             redirectURI: localHostURL,
             codeChallenge: codeChallenge,
             state: nil,
-            scopes: self.getRedirectURLScopes
+            scopes: Self.getRedirectURLScopes
         )!
         
         if let redirectURI = openAuthorizationURLAndWaitForRedirect(

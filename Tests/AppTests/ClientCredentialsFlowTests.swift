@@ -7,12 +7,7 @@ import SpotifyAPITestUtilities
 import SpotifyExampleContent
 @testable import App
 
-final class ClientCredentialsFlowTests: SpotifyAPIClientCredentialsFlowTests {
-
-    override class func setUp() {
-        configureEnvironmentVariables()
-        super.setUp()
-    }
+final class ClientCredentialsFlowTests: XCTestCase {
 
     var app: Application!
 

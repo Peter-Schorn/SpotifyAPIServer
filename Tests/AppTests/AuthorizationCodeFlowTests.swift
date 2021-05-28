@@ -7,13 +7,10 @@ import SpotifyAPITestUtilities
 import SpotifyExampleContent
 @testable import App
 
-final class AuthorizationCodeFlowTests: SpotifyAPIAuthorizationCodeFlowTests {
-    
-    override class func setUp() {
-        configureEnvironmentVariables()
-        super.setUp()
-    }
-    
+final class AuthorizationCodeFlowTests: XCTestCase {
+
+    static let spotify = SpotifyAPI<AuthorizationCodeFlowManager>.sharedTest
+
     var app: Application!
     
     override func setUp() {
@@ -70,7 +67,7 @@ final class AuthorizationCodeFlowTests: SpotifyAPIAuthorizationCodeFlowTests {
                 )
                 XCTAssertEqual(
                     authInfo.scopes,
-                    Self.spotify.authorizationManager.getRedirectURLScopes
+                    AuthorizationCodeFlowManager.getRedirectURLScopes
                 )
 
                 XCTAssertDateIsOneHourFromNow(
