@@ -149,15 +149,28 @@ func withInvalidCredentials<T>(
 ) rethrows -> T {
     
     let credentials = spotifyCredentials
-    
-    setenv("CLIENT_ID", "invalidClientId", 1)
-    setenv("CLIENT_SECRET", "invalidClientSecret", 1)
+
+    let invalidClientId = "invalidClientId"
+    let invalidClientSecret = "invalidClientSecret"
+
+    setenv("CLIENT_ID", invalidClientId, 1)
+    setenv("CLIENT_SECRET", invalidClientSecret, 1)
     
     let result = try body()
     
     setenv("CLIENT_ID", credentials.clientId, 1)
     setenv("CLIENT_SECRET", credentials.clientSecret, 1)
     
+    XCTAssertNotEqual(
+        credentials.clientId, invalidClientId,
+        "credentials.clientId should not be invalid"
+    )
+    XCTAssertNotEqual(
+        credentials.clientSecret,
+        invalidClientSecret,
+        "credentials.clientSecret should not be invalid"
+    )
+
     return result
     
 }
