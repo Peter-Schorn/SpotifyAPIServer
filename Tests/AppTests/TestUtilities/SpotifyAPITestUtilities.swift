@@ -186,7 +186,7 @@ extension AuthorizationCodeFlowManager {
     
     /// Calls through to `makeAuthorizationURL` then
     /// `openAuthorizationURLAndWaitForRedirect`.
-    func getRedirectURI() -> URL? {
+    func getRedirectURI() throws -> URL {
         
         let authorizationURL = self.makeAuthorizationURL(
             redirectURI: localHostURL,
@@ -194,12 +194,12 @@ extension AuthorizationCodeFlowManager {
             scopes: Self.getRedirectURLScopes
         )!
         
-        if let redirectURI = openAuthorizationURLAndWaitForRedirect(
-            authorizationURL
-        ) {
-            return redirectURI
-        }
-        return nil
+        let redirectURI = try XCTUnwrap(
+            openAuthorizationURLAndWaitForRedirect(authorizationURL),
+            "couldn't get redirectURI"
+        )
+
+        return redirectURI
         
     }
     
@@ -246,7 +246,7 @@ extension AuthorizationCodeFlowPKCEManager {
     
     /// Calls through to `makeAuthorizationURL` then
     /// `openAuthorizationURLAndWaitForRedirect`.
-    func getRedirectURI() -> (redirectURI: URL, codeVerifier: String)? {
+    func getRedirectURI() throws -> (redirectURI: URL, codeVerifier: String) {
         
         let codeVerifier = String.randomURLSafe(length: 43)
         let codeChallenge = String.makeCodeChallenge(codeVerifier: codeVerifier)
@@ -258,13 +258,13 @@ extension AuthorizationCodeFlowPKCEManager {
             scopes: Self.getRedirectURLScopes
         )!
         
-        if let redirectURI = openAuthorizationURLAndWaitForRedirect(
-            authorizationURL
-        ) {
-            return (redirectURI: redirectURI, codeVerifier: codeVerifier)
-        }
-        return nil
-        
+        let redirectURI = try XCTUnwrap(
+            openAuthorizationURLAndWaitForRedirect(authorizationURL),
+            "couldn't get redirectURI"
+        )
+
+        return (redirectURI: redirectURI, codeVerifier: codeVerifier)
+
     }
     
     /// Calls through to `getRedirectURI` and parses the base redirect URI and
