@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: swift test --filter "GeneralTests|ClientCredentialsFlowTests"
 
-  test-macOS:
+  test_macOS:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
