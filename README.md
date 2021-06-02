@@ -6,6 +6,8 @@ Can be run as a local server directly from Xcode. It will run on `http://127.0.0
 
 This sever can be used with [SpotifyAPI](https://github.com/Peter-Schorn/SpotifyAPI). See [Using a Backend Server to Retrieve the Authorization Information](https://github.com/Peter-Schorn/SpotifyAPI/wiki/Using-a-Backend-Server-to-Retrieve-the-Authorization-Information) for more information.
 
+Can also be used with the [Spotify iOS SDK](https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh/). Assign [/authorization-code-flow/retrieve-tokens](#post-authorization-code-flowretrieve-tokens) to the "tokenSwapURL" and [/authorization-code-flow/refresh-tokens](#post-authorization-code-flowrefresh-tokens) to "tokenRefreshURL".
+
 ## Table of Contents
 
 * **[Environment](#Environment)**
