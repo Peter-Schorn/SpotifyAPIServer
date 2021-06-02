@@ -4,11 +4,14 @@
 
 Can be run as a local server directly from Xcode. It will run on `http://127.0.0.1:7000`.
 
+This sever can be used with [SpotifyAPI](https://github.com/Peter-Schorn/SpotifyAPI). See [Using a Backend Server to Retrieve the Authorization Information](https://github.com/Peter-Schorn/SpotifyAPI/wiki/Using-a-Backend-Server-to-Retrieve-the-Authorization-Information) for more information.
+
 ## Table of Contents
 
 * **[Environment](#Environment)**
 * **[Deploying to Heroku](#Deploying-to-Heroku)**
 * **[Endpoints](#Endpoints)**
+* **[Errors](#Errors)**
 
 ## Environment
 
@@ -16,7 +19,7 @@ Requires the following environment variables:
 
 * `CLIENT_ID`: Your client id from Spotify.
 * `CLIENT_SECRET`: Your client secret from Spotify.
-* `REDIRECT_URI`:  The redirect URI. Can be omitted if this value is sent in the body of requests to the [/authorization-code-flow/retrieve-tokens](#post-authorization-code-flowretrieve-tokens) or [/authorization-code-flow-pkce/retrieve-tokens](#post-authorization-code-flow-pkceretrieve-tokens) endpoints. If you are using this server with the [Spotify iOS SDK](https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh), then you must set this value, as it will not be sent in the body of the request to the /authorization-code-flow/retrieve-tokens endpoint. 
+* `REDIRECT_URI`:  The redirect URI. Can be omitted if this value is sent in the body of requests to the [/authorization-code-flow/retrieve-tokens](#post-authorization-code-flowretrieve-tokens) or [/authorization-code-flow-pkce/retrieve-tokens](#post-authorization-code-flow-pkceretrieve-tokens) endpoints. If both are present, then the value sent in the body of the request takes precedence. If you are using this server with the [Spotify iOS SDK](https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh), then you must set this value, as it will not be sent in the body of the request to the /authorization-code-flow/retrieve-tokens endpoint. 
 * `SECRET_KEY`: A randomly generated string that is used to generate a key for encryption. No specific length is required, but generally it should be at least 20 characters. This key is used to encrypt and decrypt the refresh token returned by Spotify. **Warning**: If you change this value, then any previously-retrieved authorization information will be invalidated.
 * `LOG_LEVEL`: Not required, but can be used to change the log level of the loggers used by Vapor (but not the ones used by `SpotifyAPI`). See [here](https://docs.vapor.codes/4.0/logging/#level) for more information. See [here](https://devcenter.heroku.com/articles/logging#log-retrieval-via-the-web-dashboard) for how to retrieve the logs from Heroku.
 
@@ -317,3 +320,30 @@ This method returns the authorization information as JSON data that can be decod
 ```
 
 Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=6.%20requesting%20a%20refreshed%20access%20token).
+
+## Errors
+
+Any error that is received from the Spotify web API, along with the headers and status code, are forwarded directly to the client, as [SpotifyAPI](https://github.com/Peter-Schorn/SpotifyAPI) already knows how to decode these errors. Therefore, do not attempt to decode these errors yourself. If this server encounters an error (e.g., the request body could not be decoded into the expected type, or the refresh token could not be encrypted/decrypted), then the status code will be in the 4xx range, the headers will contain the "Content-Type: application/json" header, and the response body will be a JSON object with the following keys:
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Type</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>error</td>
+      <td>Boolean</td>
+      <td>Always set to <code>true</code> to disambiguate this response from the JSON payload of a successful response.</td>
+    </tr>
+    <tr>
+      <td>reason</td>
+      <td>String</td>
+      <td>A short description of the cause of this error.</td>
+    </tr>
+  </tbody>
+</table>
+

@@ -25,8 +25,8 @@ extension NIOHTTP1.HTTPHeaders {
 extension Endpoints {
     
     /**
-     The URL for retrieving refresh and access tokens, and refreshing the
-     access token.
+     The URL for retrieving refresh and access tokens, and refreshing the access
+     token.
      
      This URL is represented using Vapor's `URI` type.
 
@@ -40,8 +40,8 @@ extension Endpoints {
 
 extension ClientCredentialsTokensRequest: Content {
     
-    // This property tells vapor to encode instances of this type
-    // using the "x-www-form-urlencoded" format by default.
+    // This property tells vapor to encode instances of this type using the
+    // "x-www-form-urlencoded" format by default.
     public static let defaultContentType = HTTPMediaType.urlEncodedForm
     
 }

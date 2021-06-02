@@ -19,7 +19,7 @@
             "required": true
         },
         "REDIRECT_URI": {
-            "description": "The redirect URI. Can be omitted if this value is sent in the body of requests to the /authorization-code-flow/retrieve-tokens or /authorization-code-flow-pkce/retrieve-tokens endpoints. If you are using this server with the Spotify iOS SDK, then you must set this value, as it will not be sent in the body of the request to the /authorization-code-flow/retrieve-tokens endpoint.",
+            "description": "The redirect URI. Can be omitted if this value is sent in the body of requests to the /authorization-code-flow/retrieve-tokens or /authorization-code-flow-pkce/retrieve-tokens endpoints. If both are present, then the value sent in the body of the request takes precedence. If you are using this server with the Spotify iOS SDK, then you must set this value, as it will not be sent in the body of the request to the /authorization-code-flow/retrieve-tokens endpoint.",
             "required": false
         },
         "LOG_LEVEL": {
