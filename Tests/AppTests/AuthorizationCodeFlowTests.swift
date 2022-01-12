@@ -39,7 +39,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -50,7 +50,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -184,7 +184,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -194,7 +194,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -245,7 +245,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -255,7 +255,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
     
@@ -290,7 +290,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
 
@@ -300,7 +300,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
 
@@ -335,7 +335,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -402,7 +402,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -412,7 +412,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
 
@@ -455,7 +455,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -465,7 +465,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -507,7 +507,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -517,7 +517,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 

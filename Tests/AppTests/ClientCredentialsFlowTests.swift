@@ -37,7 +37,7 @@ final class ClientCredentialsFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
 
@@ -96,7 +96,7 @@ final class ClientCredentialsFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -106,7 +106,7 @@ final class ClientCredentialsFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -135,7 +135,7 @@ final class ClientCredentialsFlowTests: XCTestCase {
                     """
                     unexpected status code:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
                 
@@ -145,7 +145,7 @@ final class ClientCredentialsFlowTests: XCTestCase {
                     response headers should contain content-type: \
                     application/json header:
                     response: \(response)
-                    body: \(String(buffer: response.body))"
+                    body: \(String(buffer: response.body))
                     """
                 )
 
