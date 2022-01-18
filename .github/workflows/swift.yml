@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ["swift:5.3", "swift:5.4"]
+        image: ["swift:5.3", "swift:5.4", "swift:5.5"]
     
     runs-on: ubuntu-latest
     container: ${{ matrix.image }}
