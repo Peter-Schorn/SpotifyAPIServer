@@ -106,7 +106,7 @@ Returns the authorization information as JSON data that can be decoded into [`Au
 }
 ```
 
-Read more at the [Spotify web API reference](authorization/client-credentials/).
+Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/#request-authorization).
 
 ### POST /authorization-code-flow/retrieve-tokens
 

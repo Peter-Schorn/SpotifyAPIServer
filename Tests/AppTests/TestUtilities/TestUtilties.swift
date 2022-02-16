@@ -34,7 +34,7 @@ enum ServerEndpoints {
      Retrieves the authorization information for the [Client Credentials
      Flow][1].
      
-     [1]: https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
+     [1]: https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/
      */
     static let clientCredentialsFlowRetrieveTokens =
             "client-credentials-flow/retrieve-tokens"
@@ -45,7 +45,7 @@ enum ServerEndpoints {
      Retrieves the authorization information for the [Authorization Code
      Flow][1]
      
-     [1]: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+     [1]: https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
      */
     static let authorizationCodeFlowRetrieveTokens =
             "authorization-code-flow/retrieve-tokens"
@@ -55,7 +55,7 @@ enum ServerEndpoints {
 
      Refreshes the access token for the [Authorization Code Flow][1]
      
-     [1]: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+     [1]: https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
      */
     static let authorizationCodeFlowRefreshTokens =
             "authorization-code-flow/refresh-tokens"
@@ -66,7 +66,7 @@ enum ServerEndpoints {
      Retrieves the authorization information for the [Authorization Code Flow
      with Proof Key for Code Exchange][1]
      
-     [1]: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
+     [1]: https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
      */
     static let authorizationCodeFlowPKCERetrieveTokens =
         "authorization-code-flow-pkce/retrieve-tokens"
@@ -77,7 +77,7 @@ enum ServerEndpoints {
      Refreshes the access token for the [Authorization Code Flow with Proof Key
      for Code Exchange][1]
      
-     [1]: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
+     [1]: https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
      */
     static let authorizationCodeFlowPKCERefreshTokens =
         "authorization-code-flow-pkce/refresh-tokens"
