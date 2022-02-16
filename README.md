@@ -1,10 +1,10 @@
 # SpotifyAPIServer
 
-**A server that handles the process of retrieving the authorization information and refreshing tokens for the Spotify web API on behalf of your frontend app. Supports the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow),  [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow), and  [Authorization Code Flow with Proof Key for Code Exchange](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce)**.
+**A server that handles the process of retrieving the authorization information and refreshing tokens for the Spotify web API on behalf of your frontend app. Supports the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/),  [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/), and  [Authorization Code Flow with Proof Key for Code Exchange](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/)**.
 
 Can be run as a local server directly from Xcode. It will run on `http://127.0.0.1:7000`.
 
-This sever can be used with [SpotifyAPI](https://github.com/Peter-Schorn/SpotifyAPI). See [Using a Backend Server to Retrieve the Authorization Information](https://github.com/Peter-Schorn/SpotifyAPI/wiki/Using-a-Backend-Server-to-Retrieve-the-Authorization-Information) for more information.
+This sever can be used with [SpotifyAPI](https://github.com/Peter-Schorn/SpotifyAPI). See [Using a Backend Server to Retrieve the Authorization Information](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/additional-authorization-methods) for more information.
 
 Can also be used with the [Spotify iOS SDK](https://developer.spotify.com/documentation/ios/guides/token-swap-and-refresh/). Assign [/authorization-code-flow/retrieve-tokens](#post-authorization-code-flowretrieve-tokens) to the "tokenSwapURL" and [/authorization-code-flow/refresh-tokens](#post-authorization-code-flowrefresh-tokens) to "tokenRefreshURL".
 
@@ -65,9 +65,9 @@ Returns the text "success". Used to indicate that the server is online.
 
 ### POST /client-credentials-flow/retrieve-tokens
 
-Retrieves the authorization information for the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow).
+Retrieves the authorization information for the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/).
 
-A request to this endpoint can be made by [`ClientCredentialsFlowProxyBackend.makeClientCredentialsTokensRequest()`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsFlowProxyBackend.html#/s:13SpotifyWebAPI33ClientCredentialsFlowProxyBackendV04makedE13TokensRequest7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGyF). Assign this endpoint to `ClientCredentialsFlowProxyBackend.tokensURL`.
+A request to this endpoint can be made by [`ClientCredentialsFlowProxyBackend.makeClientCredentialsTokensRequest()`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/clientcredentialsflowproxybackend/makeclientcredentialstokensrequest()). Assign this endpoint to [`ClientCredentialsFlowProxyBackend.tokensURL`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/clientcredentialsflowproxybackend/tokensurl).
 
 **Request**
 
@@ -90,13 +90,13 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
-See [`ClientCredentialsTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ClientCredentialsTokensRequest.html), which can be used to encode this data.
+See [`ClientCredentialsTokensRequest`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/clientcredentialstokensrequest), which can be used to encode this data.
 
 **Response** 
 
 Header: `Content-Type: application/json`
 
-Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthInfo.html). The `accessToken` and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
+Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authinfo). The `accessToken` and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
 
 ```
 {
@@ -106,13 +106,13 @@ Returns the authorization information as JSON data that can be decoded into [`Au
 }
 ```
 
-Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=the%20request%20is%20sent%20to%20the%20%2Fapi%2Ftoken%20endpoint%20of%20the%20accounts%20service%3A).
+Read more at the [Spotify web API reference](authorization/client-credentials/).
 
 ### POST /authorization-code-flow/retrieve-tokens
 
-Retrieves the authorization information for the [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow).
+Retrieves the authorization information for the [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.requestAccessAndRefreshTokens(code:redirectURIWithQuery:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowProxyBackend.html#/s:13SpotifyWebAPI33AuthorizationCodeFlowProxyBackendV29requestAccessAndRefreshTokens4code20redirectURIWithQuery7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_AJ3URLVtF). Assign this endpoint to `AuthorizationCodeFlowProxyBackend.tokensURL`.
+A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.requestAccessAndRefreshTokens(code:redirectURIWithQuery:)`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowproxybackend/requestaccessandrefreshtokens(code:redirecturiwithquery:)). Assign this endpoint to [`AuthorizationCodeFlowProxyBackend.tokensURL`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowproxybackend/tokensurl).
 
 **Request**
 
@@ -143,13 +143,13 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
-See [`ProxyTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyTokensRequest.html), which can be used to encode this data.
+See [`ProxyTokensRequest`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/proxytokensrequest), which can be used to encode this data.
 
 **Response**
 
 Header: `Content-Type: application/json`
 
-Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthInfo.html). The `accessToken`,`refreshToken`, and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
+Returns the authorization information as JSON data that can be decoded into [`AuthInfo`]https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authinfo). The `accessToken`,`refreshToken`, and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
 
 ```
 {
@@ -161,13 +161,13 @@ Returns the authorization information as JSON data that can be decoded into [`Au
 }
 ```
 
-Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=2.%20have%20your%20application%20request%20refresh%20and%20access%20tokens%3B%20spotify%20returns%20access%20and%20refresh%20tokens).
+Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/#request-access-token).
 
 ### POST /authorization-code-flow/refresh-tokens
 
-Refreshes the access token for the [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow).
+Refreshes the access token for the [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.refreshTokens(refreshToken:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowProxyBackend.html#/s:13SpotifyWebAPI33AuthorizationCodeFlowProxyBackendV13refreshTokens0I5Token7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_tF). Assign this endpoint to `AuthorizationCodeFlowProxyBackend.tokenRefreshURL`.
+A request to this endpoint can be made by [`AuthorizationCodeFlowProxyBackend.refreshTokens(refreshToken:)`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowproxybackend/refreshtokens(refreshtoken:)). Assign this endpoint to [`AuthorizationCodeFlowProxyBackend.tokenRefreshURL`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowproxybackend/tokenrefreshurl).
 
 **Request**
 
@@ -194,13 +194,13 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
-See [`RefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html), which can be used to encode this data.
+See [`RefreshTokensRequest`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/refreshtokensrequest), which can be used to encode this data.
 
 **Response**
 
 Header: `Content-Type: application/json`
 
-Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthInfo.html). The `accessToken` and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
+Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authinfo). The `accessToken` and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
 
 ```
 {
@@ -211,13 +211,13 @@ Returns the authorization information as JSON data that can be decoded into [`Au
 }
 ```
 
-Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=4.%20requesting%20a%20refreshed%20access%20token%3B%20spotify%20returns%20a%20new%20access%20token%20to%20your%20app).
+Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/#request-a-refreshed-access-token).
 
 ### POST /authorization-code-flow-pkce/retrieve-tokens
 
-Retrieves the authorization information for the [Authorization Code Flow with Proof Key for Code Exchange](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce).
+Retrieves the authorization information for the [Authorization Code Flow with Proof Key for Code Exchange](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.requestAccessAndRefreshTokens(code:codeVerifier:redirectURIWithQuery:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowPKCEProxyBackend.html#/s:13SpotifyWebAPI37AuthorizationCodeFlowPKCEProxyBackendV29requestAccessAndRefreshTokens4code0N8Verifier20redirectURIWithQuery7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_SSAK3URLVtF). Assign this endpoint to `AuthorizationCodeFlowPKCEProxyBackend.tokensURL`.
+A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.requestAccessAndRefreshTokens(code:codeVerifier:redirectURIWithQuery:)`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowpkceproxybackend/requestaccessandrefreshtokens(code:codeverifier:redirecturiwithquery:)). Assign this endpoint to [`AuthorizationCodeFlowPKCEProxyBackend.tokensURL`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowpkceproxybackend/tokensurl).
 
 **Request**
 
@@ -252,13 +252,13 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
-See [`ProxyPKCETokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/ProxyPKCETokensRequest.html), which can be used to encode this data.
+See [`ProxyPKCETokensRequest`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/proxypkcetokensrequest), which can be used to encode this data.
 
 **Response**
 
 Header: `Content-Type: application/json`
 
-Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthInfo.html). The `accessToken`,`refreshToken`, and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
+Returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authinfo). The `accessToken`,`refreshToken`, and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
 
 ```
 {
@@ -270,13 +270,13 @@ Returns the authorization information as JSON data that can be decoded into [`Au
 }
 ```
 
-Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=4.%20your%20app%20exchanges%20the%20code%20for%20an%20access%20token).
+Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/#request-access-token).
 
 ### POST /authorization-code-flow-pkce/refresh-tokens
 
-Refreshes the access token for the [Authorization Code Flow with Proof Key for Code Exchange](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce).
+Refreshes the access token for the [Authorization Code Flow with Proof Key for Code Exchange](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).
 
-A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.refreshTokens(refreshToken:)`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthorizationCodeFlowPKCEProxyBackend.html#/s:13SpotifyWebAPI37AuthorizationCodeFlowPKCEProxyBackendV13refreshTokens0I5Token7Combine12AnyPublisherVy10Foundation4DataV4data_So17NSHTTPURLResponseC8responsets5Error_pGSS_tF). Assign this endpoint to `AuthorizationCodeFlowPKCEProxyBackend.tokenRefreshURL`.
+A request to this endpoint can be made by [`AuthorizationCodeFlowPKCEProxyBackend.refreshTokens(refreshToken:)`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowpkceproxybackend/refreshtokens(refreshtoken:)). Assign this endpoint to [`AuthorizationCodeFlowPKCEProxyBackend.tokenRefreshURL`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authorizationcodeflowpkceproxybackend/tokenrefreshurl).
 
 **Request**
 
@@ -303,13 +303,13 @@ The body must contain the following in x-www-form-urlencoded format:
   </tbody>
 </table>
 
-See [`ProxyPKCERefreshTokensRequest`](https://peter-schorn.github.io/SpotifyAPI/Structs/RefreshTokensRequest.html), which can be used to encode this data.
+See [`ProxyPKCERefreshTokensRequest`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/proxypkcerefreshtokensrequest), which can be used to encode this data.
 
 **Response**
 
 Header: `Content-Type: application/json`
 
-This method returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://peter-schorn.github.io/SpotifyAPI/Structs/AuthInfo.html). The `accessToken`, `refreshToken`, and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
+This method returns the authorization information as JSON data that can be decoded into [`AuthInfo`](https://spotify-api-docs.herokuapp.com/documentation/spotifywebapi/authinfo). The `accessToken`, `refreshToken`, and `expirationDate` (which can be decoded from the "expires_in" JSON key) properties should be non-`nil`. For example:
 
 ```
 {
@@ -321,7 +321,7 @@ This method returns the authorization information as JSON data that can be decod
 }
 ```
 
-Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization-guide/#:~:text=6.%20requesting%20a%20refreshed%20access%20token).
+Read more at the [Spotify web API reference](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/#request-a-refreshed-access-token).
 
 ## Errors
 
@@ -348,4 +348,3 @@ Any error that is received from the Spotify web API, along with the headers and 
     </tr>
   </tbody>
 </table>
-
