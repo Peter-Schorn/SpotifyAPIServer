@@ -23,7 +23,7 @@ final class AuthorizationCodeFlowTests: XCTestCase {
 
     // MARK: - Retrieve Tokens -
 
-    /// Successfully refresh the tokens.
+    /// Successfully retrieve the tokens.
     func retrieveTokens(_ proxyTokensRequest: ProxyTokensRequest) throws {
         
         try self.app.test(
