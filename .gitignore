@@ -7,3 +7,4 @@ DerivedData/
 db.sqlite
 /Package.resolved
 .vscode
+/push_ecr.sh
