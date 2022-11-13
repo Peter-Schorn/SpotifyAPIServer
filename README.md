@@ -12,6 +12,7 @@ Can also be used with the [Spotify iOS SDK](https://developer.spotify.com/docume
 
 * **[Environment](#Environment)**
 * **[Deploying to Heroku](#Deploying-to-Heroku)**
+* **[Deploying to AWS](#Deploying to AWS)**
 * **[Endpoints](#Endpoints)**
 * **[Errors](#Errors)**
 
@@ -56,6 +57,10 @@ git push heroku main
 ```
 
 See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard) for how to configure the above-mentioned environment variables on heroku.
+
+## Deploying to AWS
+
+This server is also available as a docker image in the Amazon [ECR Public Gallery](https://gallery.ecr.aws/h4z3r8p2/spotify-api-server). Create an App Runner server [here](https://console.aws.amazon.com/apprunner#/create). Choose "Container registry" for "Repository type" and "Amazon ECR Public" for "Provider". For "Container image URI," use `public.ecr.aws/h4z3r8p2/spotify-api-server:latest`.  Then, click next. Configure the environment variables as described above. For "Port," use `8080`. Follow the prompts to create the service. Read more about App Runner [here](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html).
 
 ## Endpoints
 
