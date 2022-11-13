@@ -60,7 +60,7 @@ See [here](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-da
 
 ## Deploying to AWS
 
-This server is also available as a docker image in the Amazon [ECR Public Gallery](https://gallery.ecr.aws/h4z3r8p2/spotify-api-server). Create an App Runner server [here](https://console.aws.amazon.com/apprunner#/create). Choose "Container registry" for "Repository type" and "Amazon ECR Public" for "Provider". For "Container image URI," use `public.ecr.aws/h4z3r8p2/spotify-api-server:latest`.  Then, click next. Configure the environment variables as described above. For "Port," use `8080`. Follow the prompts to create the service. Read more about App Runner [here](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html).
+This server is also available as a docker image in the Amazon [ECR Public Gallery](https://gallery.ecr.aws/h4z3r8p2/spotify-api-server). Create an App Runner service [here](https://console.aws.amazon.com/apprunner#/create). Choose "Container registry" for "Repository type" and "Amazon ECR Public" for "Provider". For "Container image URI," use `public.ecr.aws/h4z3r8p2/spotify-api-server:latest`.  Then, click next. Configure the environment variables as described above. For "Port," use `8080`. Follow the prompts to create the service. Read more about App Runner [here](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html).
 
 See also [this article](https://markn.ca/2021/how-to-run-just-one-container-with-aws-app-runner-hopefully/).
 
