@@ -12,7 +12,7 @@ Can also be used with the [Spotify iOS SDK](https://developer.spotify.com/docume
 
 * **[Environment](#Environment)**
 * **[Deploying to Heroku](#Deploying-to-Heroku)**
-* **[Deploying to AWS](#Deploying to AWS)**
+* **[Deploying to AWS](#Deploying-to-AWS)**
 * **[Endpoints](#Endpoints)**
 * **[Errors](#Errors)**
 
