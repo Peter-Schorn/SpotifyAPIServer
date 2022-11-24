@@ -1,2 +1,6 @@
 .build/
 .swiftpm/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+.git
+.gitignore

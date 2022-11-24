@@ -8,3 +8,7 @@ db.sqlite
 /Package.resolved
 .vscode
 /push_ecr.sh
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
