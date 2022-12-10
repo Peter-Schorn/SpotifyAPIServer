@@ -12,3 +12,4 @@ db.sqlite
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+/aws

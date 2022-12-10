@@ -1,11 +1,12 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-      "Name": "public.ecr.aws/h4z3r8p2/spotify-api-server:latest"
+        "Name": "947734355387.dkr.ecr.us-east-1.amazonaws.com/spotify-api-backend:latest",
+        "Update": "true"
     },
     "Ports": [
-      {
-        "ContainerPort": 8080
-      }
+        {
+            "ContainerPort": 8080
+        }
     ]
-  }
+}
