@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-        "Name": "947734355387.dkr.ecr.us-east-1.amazonaws.com/spotify-api-backend:latest",
+        "Name": "947734355387.dkr.ecr.us-east-1.amazonaws.com/spotify-api-backend:arm-latest",
         "Update": "true"
     },
     "Ports": [
