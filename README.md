@@ -32,7 +32,7 @@ This server is pre-configured for deployment to [Heroku](https://www.heroku.com/
 
 **One-Click Deployment**
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Peter-Schorn/SpotifyAPIServer)
 
 **Manual Deployment**
 
